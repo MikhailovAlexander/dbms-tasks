@@ -12,11 +12,11 @@ def db_engine():
     """Фикстура для создания движка SQLAlchemy."""
     settings = Settings()
     conn_str = CONN_STR_TEMPLATE.format(
-        user=settings.DB_USER,
-        password=settings.DB_PASSWORD,
-        host=settings.DB_HOST,
-        port=settings.DB_PORT,
-        dbname=settings.DB_NAME,
+        user=settings.POSTGRES_USER,
+        password=settings.POSTGRES_PASSWORD,
+        host=settings.POSTGRES_HOST,
+        port=settings.POSTGRES_PORT,
+        dbname=settings.POSTGRES_DB,
     )
     engine = create_engine(conn_str)
     yield engine

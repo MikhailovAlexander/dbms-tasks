@@ -35,7 +35,7 @@ docker compose -f docker-compose.local.yml --env-file=.env.local  up -d
 Чтобы остановить и удалить контейнеры, выполните:
 
 ```bash
-docker compose -f docker-compose.local.yml --env-file=.env.local  down -v
+docker compose -f docker-compose.local.yml --env-file=.env.local  down
 ```
 
 Чтобы остановить и удалить контейнеры, а также удалить volumes с данными, выполните:
