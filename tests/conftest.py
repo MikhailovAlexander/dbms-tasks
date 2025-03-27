@@ -1,5 +1,5 @@
 import pytest
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
 from tests.config import Settings
@@ -19,6 +19,18 @@ def db_engine():
         dbname=settings.POSTGRES_DB,
     )
     engine = create_engine(conn_str)
+
+    connection = engine.connect()
+    transaction = connection.begin()
+    session = sessionmaker(bind=connection)()
+    init_script = None
+    with open("./init/init.sql", "r") as file:
+        init_script = file.read()
+    session.execute(text(init_script))
+    session.close()
+    transaction.commit()
+    connection.close()
+
     yield engine
     engine.dispose()  # Закрываем соединение после завершения тестов
 
